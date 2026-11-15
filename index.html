@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8062df">
+  <title>Color Palette Generator &amp; Contrast Checker | Velmora Color Studio</title>
+  <meta name="description" content="Generate color palettes, build CSS gradients, convert HEX to RGB and HSL, check WCAG contrast, and export your palette as CSS or JSON.">
+  <meta name="author" content="Velmora Creative">
+
+  <!-- SEO: replace https://YOUR-DOMAIN.com with your real address before launch -->
+  <!-- While the site is still private/staging, change the line below to: noindex, nofollow -->
+  <!-- Switch back to "index, follow" on launch day -->
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Slack, Discord) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Velmora Color Studio">
+  <meta property="og:title" content="Velmora Color Studio: Color Palette Generator &amp; Contrast Checker">
+  <meta property="og:description" content="Generate palettes, explore gradients, check contrast and export your colors as CSS or JSON.">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Velmora Color Studio: find your next perfect palette">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Velmora Color Studio: Color Palette Generator &amp; Contrast Checker">
+  <meta name="twitter:description" content="Generate palettes, explore gradients, check contrast and export your colors as CSS or JSON.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+
+  <!-- Structured data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Velmora Color Studio",
+        "url": "https://YOUR-DOMAIN.com/",
+        "description": "A color toolkit to generate palettes, explore gradients, convert HEX to RGB and HSL, check WCAG contrast, and export palettes as CSS variables or JSON.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any (runs in the browser)",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": "en",
+        "creator": { "@id": "https://YOUR-DOMAIN.com/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://YOUR-DOMAIN.com/#organization",
+        "name": "Velmora Creative",
+        "url": "https://YOUR-DOMAIN.com/"
+      }
+    ]
+  }
+  </script>
+  <!-- Inline favicon so there is no missing-file 404. Swap for favicon.png if you add one. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%238062df'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='800' text-anchor='middle' fill='white' font-family='Arial,sans-serif'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Velmora Color Studio home">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span>VELMORA <small>COLOR STUDIO</small></span>
+    </a>
+    <span class="top-note">A little color goes a long way.</span>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p class="eyebrow">COLOR TOOLKIT / 001</p>
+      <h1>Find your next<br><span>perfect palette.</span></h1>
+      <p class="intro-copy">Generate colors, explore gradients, check contrast and take your palette anywhere.</p>
+    </section>
+
+    <section class="panel palette-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">YOUR WORKSPACE</p><h2>Color palette</h2></div>
+        <button class="button button-primary" id="generateBtn">↻ Generate palette</button>
+      </div>
+      <div class="swatches" id="swatches" role="group" aria-label="Color palette"></div>
+      <noscript><p class="hint">Velmora Color Studio needs JavaScript to generate palettes, gradients and contrast checks. Please turn it on in your browser settings.</p></noscript>
+      <p class="hint">Tip: click a color to copy it. Use the lock to keep a color while generating.</p>
+    </section>
+
+    <section class="tools-grid">
+      <article class="panel">
+        <p class="eyebrow">01 / GRADIENT</p>
+        <h2>Gradient playground</h2>
+        <div class="gradient-preview" id="gradientPreview" role="img" aria-label="Gradient preview"></div>
+        <div class="field-row">
+          <label>First color<input type="color" id="gradientA" value="#8062df"></label>
+          <label>Second color<input type="color" id="gradientB" value="#42c6b7"></label>
+        </div>
+        <label class="field-label" for="gradientDirection">Direction</label>
+        <select id="gradientDirection">
+          <option value="to right">Left to right</option>
+          <option value="to bottom">Top to bottom</option>
+          <option value="135deg">Diagonal</option>
+          <option value="to left">Right to left</option>
+        </select>
+        <button class="button button-secondary full" id="copyGradient">Copy CSS gradient</button>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">02 / CONVERTER</p>
+        <h2>Color converter</h2>
+        <label class="field-label" for="convertHex">HEX value</label>
+        <div class="input-with-button"><input id="convertHex" value="#8062DF" maxlength="7" spellcheck="false" autocomplete="off"><button class="mini-button" id="convertBtn">Convert</button></div>
+        <div class="conversion-list">
+          <div><span>RGB</span><strong id="rgbValue">128, 98, 223</strong><button data-copy="rgbValue" aria-label="Copy RGB">Copy</button></div>
+          <div><span>HSL</span><strong id="hslValue">255, 65%, 63%</strong><button data-copy="hslValue" aria-label="Copy HSL">Copy</button></div>
+        </div>
+        <p class="status" id="convertStatus" aria-live="polite"></p>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">03 / ACCESSIBILITY</p>
+        <h2>Contrast checker</h2>
+        <div class="contrast-preview" id="contrastPreview"><span>Sample text</span><small>Preview your contrast</small></div>
+        <div class="field-row">
+          <label>Text<input type="color" id="textColor" value="#222222"></label>
+          <label>Background<input type="color" id="backgroundColor" value="#ffffff"></label>
+        </div>
+        <div class="contrast-result" aria-live="polite"><strong id="contrastRatio">15.9:1</strong><span id="contrastGrade">Excellent contrast</span></div>
+        <p class="hint">WCAG AA normal text: 4.5:1 or higher.</p>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">04 / EXPORT</p>
+        <h2>Take it with you</h2>
+        <p class="muted">Export your current palette for your next design or development project.</p>
+        <button class="button button-secondary full" id="exportCss">Download CSS variables</button>
+        <button class="button button-secondary full" id="exportJson">Download JSON palette</button>
+        <button class="button button-quiet full" id="copyPalette">Copy HEX values</button>
+        <p class="status" id="exportStatus" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <footer><span>© 2026 Velmora Creative</span><span>Made for curious creators.</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
